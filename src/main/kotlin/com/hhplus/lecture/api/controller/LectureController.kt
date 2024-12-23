@@ -2,6 +2,7 @@ package com.hhplus.lecture.api.controller
 
 import com.hhplus.lecture.api.controller.response.AvailableLecturesResponseDto
 import com.hhplus.lecture.api.controller.response.SubscriptionsResponseDto
+import com.hhplus.lecture.domain.user.UserInfo
 import com.hhplus.lecture.support.response.ApiResponse
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
@@ -14,7 +15,7 @@ class LectureController {
     @PostMapping("/{lectureId}/subscribe")
     fun subscribeLecture(
         @PathVariable lectureId: Long,
-        @RequestHeader userId: Long
+        userInfo: UserInfo
     ): ApiResponse<Unit> {
         return ApiResponse.success()
     }
@@ -22,7 +23,7 @@ class LectureController {
     @GetMapping("/{date}/available")
     fun getAvailableLectures(
         @PathVariable date: LocalDate,
-        @RequestHeader userId: Long
+        userInfo: UserInfo
     ): ApiResponse<AvailableLecturesResponseDto> {
         val lectures = listOf(
             AvailableLecturesResponseDto.LecturesDto(
@@ -39,7 +40,7 @@ class LectureController {
 
     @GetMapping("/subscriptions")
     fun getSubscriptions(
-        @RequestHeader userId: Long
+        userInfo: UserInfo
     ): ApiResponse<SubscriptionsResponseDto> {
         val lectures = listOf(
             SubscriptionsResponseDto.LecturesDto(
