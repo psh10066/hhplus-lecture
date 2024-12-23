@@ -43,4 +43,20 @@ class LectureControllerTest {
             .andExpect(jsonPath("data.lectures[0].speakerName").value("이호준"))
             .andExpect(jsonPath("error").value(null))
     }
+
+    // 특강 신청 완료 목록 조회 API E2E 테스트
+    @Test
+    fun `특강 신청 완료 목록 조회 API`() {
+        mockMvc.perform(get("/api/lectures/subscriptions")
+            .header("userId", 1L))
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("result").value("SUCCESS"))
+            .andExpect(jsonPath("data.lectures[0].id").value(1))
+            .andExpect(jsonPath("data.lectures[0].name").value("테스트 강연"))
+            .andExpect(jsonPath("data.lectures[0].startTime").value("2024-12-23T12:00:00"))
+            .andExpect(jsonPath("data.lectures[0].endTime").value("2024-12-23T13:00:00"))
+            .andExpect(jsonPath("data.lectures[0].speakerId").value(1))
+            .andExpect(jsonPath("data.lectures[0].speakerName").value("이호준"))
+            .andExpect(jsonPath("error").value(null))
+    }
 }
