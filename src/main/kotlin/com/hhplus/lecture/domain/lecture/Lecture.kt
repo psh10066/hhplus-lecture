@@ -24,8 +24,8 @@ class Lecture(
     @JoinColumn(name = "lecturer_id", nullable = false, foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
     val lecturer: Lecturer,
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lecture")
-    val subscriptions: MutableList<LectureSubscription>,
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lecture", cascade = [CascadeType.PERSIST])
+    val subscriptions: MutableList<LectureSubscription> = mutableListOf(),
 ) : BaseEntity() {
 
     fun subscribe(userInfo: UserInfo) {
