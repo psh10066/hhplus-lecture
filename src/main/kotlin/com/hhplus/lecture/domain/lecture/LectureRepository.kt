@@ -8,4 +8,6 @@ interface LectureRepository {
     fun findById(lectureId: Long): Lecture
 
     fun getAvailableLectures(userInfo: UserInfo, date: LocalDate): List<Lecture>
+
+    fun getSubscriptions(userInfo: UserInfo): List<Lecture>
 }

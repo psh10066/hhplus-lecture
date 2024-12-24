@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
 @Service
+@Transactional(readOnly = true)
 class LectureService(
     private val lectureRepository: LectureRepository
 ) {
@@ -17,6 +18,12 @@ class LectureService(
 
     fun getAvailableLectures(userInfo: UserInfo, date: LocalDate): List<LectureInfo> {
         return lectureRepository.getAvailableLectures(userInfo, date).map {
+            LectureInfo.from(it)
+        }
+    }
+
+    fun getSubscriptions(userInfo: UserInfo): List<LectureInfo> {
+        return lectureRepository.getSubscriptions(userInfo).map {
             LectureInfo.from(it)
         }
     }
