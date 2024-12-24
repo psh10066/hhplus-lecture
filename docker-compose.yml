@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0.28
+    container_name: lecture-mysql
+    environment:
+      MYSQL_DATABASE: lecture
+      MYSQL_USER: lecture-user
+      MYSQL_PASSWORD: lecture-password
+      MYSQL_ROOT_PASSWORD: root-password
+    ports:
+      - "3306:3306"

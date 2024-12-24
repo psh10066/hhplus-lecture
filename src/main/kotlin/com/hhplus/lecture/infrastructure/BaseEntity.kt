@@ -1,9 +1,6 @@
 package com.hhplus.lecture.infrastructure
 
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.MappedSuperclass
+import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import org.hibernate.proxy.HibernateProxy
@@ -16,9 +13,11 @@ abstract class BaseEntity {
     val id: Long = 0
 
     @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     val createdAt: LocalDateTime = LocalDateTime.MIN
 
     @UpdateTimestamp
+    @Column(nullable = false)
     val updatedAt: LocalDateTime = LocalDateTime.MIN
 
     final override fun equals(other: Any?): Boolean {
