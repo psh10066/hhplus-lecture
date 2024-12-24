@@ -1,5 +1,6 @@
 package com.hhplus.lecture.domain.user
 
+import com.hhplus.helper.withId
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
@@ -19,7 +20,7 @@ class UserServiceTest {
     @Test
     fun `사용자 정보를 가져올 수 있다`() {
         // given
-        given(userRepository.getById(1L)).willReturn(User(id = 1L, name = "홍길동"))
+        given(userRepository.getById(1L)).willReturn(User(name = "홍길동").withId(1L))
 
         // when
         val userInfo = userService.getUserInfo(1L)
