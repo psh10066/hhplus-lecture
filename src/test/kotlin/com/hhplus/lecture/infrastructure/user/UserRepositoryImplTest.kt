@@ -1,23 +1,24 @@
 package com.hhplus.lecture.infrastructure.user
 
 import com.hhplus.lecture.domain.user.User
+import com.hhplus.lecture.helper.CleanUp
 import com.hhplus.lecture.helper.testcontainers.BaseIntegrationTest
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.jdbc.core.JdbcTemplate
 
 @SpringBootTest
 class UserRepositoryImplTest(
     @Autowired private val userRepositoryImpl: UserRepositoryImpl,
     @Autowired private val userJpaRepository: UserJpaRepository,
-    @Autowired private val jdbcTemplate: JdbcTemplate,
+    @Autowired private val cleanUp: CleanUp,
 ) : BaseIntegrationTest() {
+
     @BeforeEach
     fun setUp() {
-        jdbcTemplate.execute("TRUNCATE TABLE user")
+        cleanUp.all()
         userJpaRepository.save(User(name = "홍길동"))
     }
 

@@ -4,17 +4,16 @@ import com.hhplus.lecture.domain.lecture.Lecture
 import com.hhplus.lecture.domain.lecture.LectureSubscription
 import com.hhplus.lecture.domain.lecture.Lecturer
 import com.hhplus.lecture.domain.user.UserInfo
+import com.hhplus.lecture.helper.CleanUp
 import com.hhplus.lecture.helper.KSelect.Companion.field
 import com.hhplus.lecture.helper.testcontainers.BaseIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.instancio.Instancio
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.jdbc.core.JdbcTemplate
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -24,23 +23,17 @@ class LectureRepositoryImplTest(
     @Autowired private val lectureJpaRepository: LectureJpaRepository,
     @Autowired private val lecturerJpaRepository: LecturerJpaRepository,
     @Autowired private val lectureSubscriptionJpaRepository: LectureSubscriptionJpaRepository,
-    @Autowired private val jdbcTemplate: JdbcTemplate
+    @Autowired private val cleanUp: CleanUp,
 ) : BaseIntegrationTest() {
     private lateinit var lecturer: Lecturer
 
     @BeforeEach
     fun setUp() {
+        cleanUp.all()
         lecturer = Instancio.of(Lecturer::class.java)
             .set(field(Lecturer::id), 0)
             .create()
         lecturerJpaRepository.save(lecturer)
-    }
-
-    @AfterEach
-    fun tearDown() {
-        jdbcTemplate.execute("TRUNCATE TABLE lecture")
-        jdbcTemplate.execute("TRUNCATE TABLE lecturer")
-        jdbcTemplate.execute("TRUNCATE TABLE lecture_subscription")
     }
 
     @Test
