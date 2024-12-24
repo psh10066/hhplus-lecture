@@ -7,6 +7,7 @@ import com.hhplus.lecture.domain.user.UserInfo
 import com.hhplus.lecture.helper.KSelect.Companion.field
 import com.hhplus.lecture.helper.testcontainers.BaseIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.instancio.Instancio
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -52,6 +53,16 @@ class LectureRepositoryImplTest(
 
         // then
         assertThat(result.id).isEqualTo(1L)
+    }
+
+    @Test
+    fun `특강 정보가 없는 경우 오류를 반환한다`() {
+        // when then
+        assertThatThrownBy {
+            lectureRepositoryImpl.getById(1L)
+        }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage("존재하지 않는 강의입니다.")
     }
 
     @Test

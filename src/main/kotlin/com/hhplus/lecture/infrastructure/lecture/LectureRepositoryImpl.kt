@@ -12,7 +12,7 @@ class LectureRepositoryImpl(
 ) : LectureRepository {
     override fun getById(lectureId: Long): Lecture {
         return lectureJpaRepository.findById(lectureId)
-            .orElseThrow { IllegalArgumentException("존재하지 않는 사용자입니다.") }
+            .orElseThrow { IllegalArgumentException("존재하지 않는 강의입니다.") }
     }
 
     override fun getAvailableLectures(userInfo: UserInfo, date: LocalDate): List<Lecture> {
