@@ -99,6 +99,7 @@ class LectureRepositoryImplTest(
             .set(field(Lecture::id), 0)
             .set(field(Lecture::lecturer), lecturer)
             .set(field(Lecture::startTime), startTime)
+            .set(field(Lecture::subscriptions), mutableListOf<LectureSubscription>())
             .create()
             .also { lectureJpaRepository.save(it) }
     }
