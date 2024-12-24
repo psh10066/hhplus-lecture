@@ -1,4 +1,4 @@
-package com.hhplus.helper
+package com.hhplus.lecture.helper
 
 import org.instancio.Select
 import org.instancio.TargetSelector

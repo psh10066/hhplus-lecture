@@ -1,6 +1,6 @@
 package com.hhplus.lecture.domain.lecture
 
-import com.hhplus.helper.KSelect.Companion.field
+import com.hhplus.lecture.helper.KSelect.Companion.field
 import com.hhplus.lecture.domain.user.UserInfo
 import org.assertj.core.api.Assertions.assertThat
 import org.instancio.Instancio
