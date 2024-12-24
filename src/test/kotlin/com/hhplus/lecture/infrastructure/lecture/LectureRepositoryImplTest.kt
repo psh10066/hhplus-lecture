@@ -5,6 +5,7 @@ import com.hhplus.lecture.domain.lecture.LectureSubscription
 import com.hhplus.lecture.domain.lecture.Lecturer
 import com.hhplus.lecture.domain.user.UserInfo
 import com.hhplus.lecture.helper.KSelect.Companion.field
+import com.hhplus.lecture.helper.testcontainers.BaseIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.instancio.Instancio
 import org.junit.jupiter.api.AfterEach
@@ -23,7 +24,7 @@ class LectureRepositoryImplTest(
     @Autowired private val lecturerJpaRepository: LecturerJpaRepository,
     @Autowired private val lectureSubscriptionJpaRepository: LectureSubscriptionJpaRepository,
     @Autowired private val jdbcTemplate: JdbcTemplate
-) {
+) : BaseIntegrationTest() {
     private lateinit var lecturer: Lecturer
 
     @BeforeEach

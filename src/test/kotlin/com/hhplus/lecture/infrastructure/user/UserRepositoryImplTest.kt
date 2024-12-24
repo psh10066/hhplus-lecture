@@ -1,6 +1,7 @@
 package com.hhplus.lecture.infrastructure.user
 
 import com.hhplus.lecture.domain.user.User
+import com.hhplus.lecture.helper.testcontainers.BaseIntegrationTest
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -9,17 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.jdbc.core.JdbcTemplate
 
 @SpringBootTest
-class UserRepositoryImplTest {
-
-    @Autowired
-    private lateinit var userRepositoryImpl: UserRepositoryImpl
-
-    @Autowired
-    private lateinit var userJpaRepository: UserJpaRepository
-
-    @Autowired
-    private lateinit var jdbcTemplate: JdbcTemplate
-
+class UserRepositoryImplTest(
+    @Autowired private val userRepositoryImpl: UserRepositoryImpl,
+    @Autowired private val userJpaRepository: UserJpaRepository,
+    @Autowired private val jdbcTemplate: JdbcTemplate,
+) : BaseIntegrationTest() {
     @BeforeEach
     fun setUp() {
         jdbcTemplate.execute("TRUNCATE TABLE user")

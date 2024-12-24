@@ -1,6 +1,7 @@
 package com.hhplus.lecture.api.controller
 
 import com.hhplus.lecture.domain.user.User
+import com.hhplus.lecture.helper.testcontainers.BaseIntegrationTest
 import com.hhplus.lecture.infrastructure.user.UserJpaRepository
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -16,16 +17,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class LectureControllerTest {
-
-    @Autowired
-    private lateinit var mockMvc: MockMvc
-
-    @Autowired
-    private lateinit var userJpaRepository: UserJpaRepository
-
-    @Autowired
-    private lateinit var jdbcTemplate: JdbcTemplate
+class LectureControllerTest(
+    @Autowired private val mockMvc: MockMvc,
+    @Autowired private val userJpaRepository: UserJpaRepository,
+    @Autowired private val jdbcTemplate: JdbcTemplate,
+) : BaseIntegrationTest() {
 
     @BeforeEach
     fun setUp() {
