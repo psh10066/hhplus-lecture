@@ -12,7 +12,7 @@ class LectureService(
 ) {
     @Transactional
     fun subscribe(userInfo: UserInfo, lectureId: Long) {
-        val lecture = lectureRepository.findById(lectureId)
+        val lecture = lectureRepository.getById(lectureId)
         lecture.subscribe(userInfo)
     }
 
