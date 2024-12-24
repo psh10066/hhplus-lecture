@@ -1,24 +1,20 @@
 package com.hhplus.lecture.domain.lecture
 
+import com.hhplus.helper.KSelect.Companion.field
 import com.hhplus.lecture.domain.user.UserInfo
 import org.assertj.core.api.Assertions.assertThat
+import org.instancio.Instancio
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
-import java.time.LocalDateTime
 
 class LectureTest {
 
     @Test
     fun `특강 신청 시 신청자 수가 증가한다`() {
         // given
-        val lecture = Lecture(
-            name = "특강",
-            startTime = LocalDateTime.of(2024, 12, 23, 13, 0),
-            endTime = LocalDateTime.of(2024, 12, 23, 14, 0),
-            lecturer = Lecturer(name = "홍길동"),
-            subscriptionCount = 0,
-            subscriptions = mutableListOf()
-        )
+        val lecture = Instancio.of(Lecture::class.java)
+            .set(field(Lecture::subscriptionCount), 0)
+            .create()
 
         // when
         lecture.subscribe(mock())
@@ -30,14 +26,9 @@ class LectureTest {
     @Test
     fun `특강 신청 시 신청자 목록에 추가된다`() {
         // given
-        val lecture = Lecture(
-            name = "특강",
-            startTime = LocalDateTime.of(2024, 12, 23, 13, 0),
-            endTime = LocalDateTime.of(2024, 12, 23, 14, 0),
-            lecturer = Lecturer(name = "홍길동"),
-            subscriptionCount = 0,
-            subscriptions = mutableListOf()
-        )
+        val lecture = Instancio.of(Lecture::class.java)
+            .set(field(Lecture::subscriptions), mutableListOf<LectureSubscription>())
+            .create()
 
         // when
         lecture.subscribe(UserInfo(123L, "홍길동"))

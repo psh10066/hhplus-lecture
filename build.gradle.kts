@@ -33,6 +33,8 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mysql")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    testImplementation("org.instancio:instancio-junit:5.2.1")
 }
 
 kotlin {

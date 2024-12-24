@@ -1,6 +1,6 @@
 package com.hhplus.lecture.domain.user
 
-import com.hhplus.helper.withId
+import org.instancio.Instancio
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
@@ -20,13 +20,14 @@ class UserServiceTest {
     @Test
     fun `사용자 정보를 가져올 수 있다`() {
         // given
-        given(userRepository.getById(1L)).willReturn(User(name = "홍길동").withId(1L))
+        val user = Instancio.of(User::class.java).create()
+        given(userRepository.getById(1L)).willReturn(user)
 
         // when
         val userInfo = userService.getUserInfo(1L)
 
         // then
-        assert(userInfo.id == 1L)
-        assert(userInfo.name == "홍길동")
+        assert(userInfo.id == user.id)
+        assert(userInfo.name == user.name)
     }
 }
