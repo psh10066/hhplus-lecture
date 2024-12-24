@@ -21,6 +21,27 @@ class LectureServiceTest {
     }
 
     @Test
+    fun `특강을 신청할 수 있다`() {
+        // given
+        val lecture = Lecture(
+            name = "특강",
+            startTime = LocalDateTime.of(2024, 12, 23, 13, 0),
+            endTime = LocalDateTime.of(2024, 12, 23, 14, 0),
+            lecturer = Lecturer(name = "홍길동"),
+            subscriptionCount = 0,
+            subscriptions = mutableListOf()
+        ).withId(1L)
+        given(lectureRepository.findById(1L)).willReturn(lecture)
+
+        // when
+        lectureService.subscribe(UserInfo(123L, "홍길동"), 1L)
+
+        // then
+        assertThat(lecture.subscriptionCount).isEqualTo(1)
+        assertThat(lecture.subscriptions[0]).isEqualTo(LectureSubscription(lecture, 123L))
+    }
+
+    @Test
     fun `사용자 별로 특강 신청 가능 목록을 조회할 수 있다`() {
         // given
         val lectures = listOf(
@@ -29,7 +50,8 @@ class LectureServiceTest {
                 startTime = LocalDateTime.of(2023, 12, 23, 12, 0, 0),
                 endTime = LocalDateTime.of(2023, 12, 23, 13, 0, 0),
                 subscriptionCount = 12,
-                lecturer = Lecturer(name = "이호준").withId(10L)
+                lecturer = Lecturer(name = "이호준").withId(10L),
+                subscriptions = mutableListOf()
             ).withId(1L)
         )
         given(

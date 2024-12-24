@@ -5,5 +5,7 @@ import java.time.LocalDate
 
 interface LectureRepository {
 
+    fun findById(lectureId: Long): Lecture
+
     fun getAvailableLectures(userInfo: UserInfo, date: LocalDate): List<Lecture>
 }
