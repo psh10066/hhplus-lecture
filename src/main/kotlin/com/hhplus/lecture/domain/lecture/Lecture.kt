@@ -6,6 +6,7 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
+@Table(name = "lecture")
 class Lecture(
     @Column(nullable = false)
     val name: String,
@@ -19,8 +20,8 @@ class Lecture(
     @Column(nullable = false)
     var subscriptionCount: Int = 0,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lecturer_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "lecturer_id", nullable = false, foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
     val lecturer: Lecturer,
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "lecture")
