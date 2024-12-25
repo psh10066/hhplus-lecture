@@ -29,6 +29,10 @@ Table lecture_subscription as "특강 신청" {
   user_id BIGINT [not null, ref: > user.id] // 사용자 ID
   created_at DATETIME [not null] // 특강 신청 시각
   updated_at DATETIME [not null] // 수정 시각
+
+  indexes {
+    (lecture_id, user_id) [unique] // UNIQUE 제약 조건
+  }
 }
 
 Table user as "사용자" {
