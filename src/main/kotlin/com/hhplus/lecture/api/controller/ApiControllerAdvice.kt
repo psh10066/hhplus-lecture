@@ -18,6 +18,12 @@ class ApiControllerAdvice {
         return ResponseEntity(ApiResponse.error(e.message), HttpStatus.BAD_REQUEST)
     }
 
+    @ExceptionHandler(IllegalStateException::class)
+    fun handleIllegalStateException(e: IllegalStateException): ResponseEntity<ApiResponse<Unit>> {
+        log.error("IllegalStateException : {}", e.message, e)
+        return ResponseEntity(ApiResponse.error(e.message), HttpStatus.BAD_REQUEST)
+    }
+
     @ExceptionHandler(Exception::class)
     fun handleException(e: Exception): ResponseEntity<ApiResponse<Unit>> {
         log.error("Exception : {}", e.message, e)

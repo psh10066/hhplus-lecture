@@ -42,7 +42,7 @@ class LectureRepositoryImplTest(
         saveLecture(LocalDateTime.of(2023, 12, 23, 10, 0))
 
         // when
-        val result = lectureRepositoryImpl.getById(1L)
+        val result = lectureRepositoryImpl.getForUpdateById(1L)
 
         // then
         assertThat(result.id).isEqualTo(1L)
@@ -52,7 +52,7 @@ class LectureRepositoryImplTest(
     fun `특강 정보가 없는 경우 오류를 반환한다`() {
         // when then
         assertThatThrownBy {
-            lectureRepositoryImpl.getById(1L)
+            lectureRepositoryImpl.getForUpdateById(1L)
         }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("존재하지 않는 강의입니다.")

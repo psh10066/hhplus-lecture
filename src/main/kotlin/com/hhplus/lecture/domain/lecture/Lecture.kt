@@ -29,6 +29,8 @@ class Lecture(
 ) : BaseEntity() {
 
     fun subscribe(userInfo: UserInfo) {
+        check(subscriptionCount < MAX_SUBSCRIPTION_COUNT) { "특강 신청 인원이 초과되었습니다." }
+
         subscriptions.add(LectureSubscription(this, userInfo.id))
         subscriptionCount++
     }
