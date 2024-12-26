@@ -86,6 +86,7 @@ class LectureControllerTest(
             .andExpect(jsonPath("data.lectures[0].endTime").value("2024-12-23T13:00:00"))
             .andExpect(jsonPath("data.lectures[0].lecturerId").value(1))
             .andExpect(jsonPath("data.lectures[0].lecturerName").value("이호준"))
+            .andExpect(jsonPath("data.lectures[0].lectureSubscriptionStatus").value("AVAILABLE"))
             .andExpect(jsonPath("error").value(null))
     }
 
