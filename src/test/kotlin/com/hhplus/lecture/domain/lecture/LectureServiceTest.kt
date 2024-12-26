@@ -27,7 +27,7 @@ class LectureServiceTest {
             .set(field(Lecture::subscriptionCount), 0)
             .set(field(Lecture::subscriptions), mutableListOf<LectureSubscription>())
             .create()
-        given(lectureRepository.getById(1L)).willReturn(lecture)
+        given(lectureRepository.getForUpdateById(1L)).willReturn(lecture)
 
         // when
         lectureService.subscribe(UserInfo(123L, "홍길동"), 1L)
