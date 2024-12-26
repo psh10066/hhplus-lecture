@@ -8,6 +8,7 @@ object SharedTestContainer {
         withDatabaseName("testdb")
         withUsername("test")
         withPassword("test")
+        withInitScript("db/init.sql")
         start()
     }
 }

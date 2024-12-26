@@ -26,6 +26,7 @@ CREATE TABLE `lecture_subscription` (
       UNIQUE (lecture_id, user_id)
 );
 
+
 CREATE TABLE `user` (
   `id` BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
