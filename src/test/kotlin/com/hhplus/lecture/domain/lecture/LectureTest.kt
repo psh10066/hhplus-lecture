@@ -52,6 +52,27 @@ class LectureTest {
     }
 
     @Test
+    fun `같은 사용자가 이미 신청한 특강에 재신청할 수 없다`() {
+        // given
+        val lecture = Instancio.of(Lecture::class.java)
+            .set(field(Lecture::subscriptionCount), 0)
+            .set(field(Lecture::subscriptions), mutableListOf<LectureSubscription>())
+            .create()
+
+        val userInfo = Instancio.of(UserInfo::class.java)
+            .set(field(UserInfo::id), 123L)
+            .create()
+        lecture.subscribe(userInfo)
+
+        // when then
+        assertThatThrownBy {
+            lecture.subscribe(userInfo)
+        }
+            .isInstanceOf(IllegalStateException::class.java)
+            .hasMessage("이미 신청한 특강입니다.")
+    }
+
+    @Test
     fun `특강 신청 시 신청자 목록에 추가된다`() {
         // given
         val lecture = Instancio.of(Lecture::class.java)
