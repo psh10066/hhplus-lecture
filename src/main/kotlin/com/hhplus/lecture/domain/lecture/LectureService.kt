@@ -16,9 +16,9 @@ class LectureService(
         lecture.subscribe(userInfo)
     }
 
-    fun getAvailableLectures(userInfo: UserInfo, date: LocalDate): List<LectureInfo> {
+    fun getAvailableLectures(userInfo: UserInfo, date: LocalDate): List<LectureWithSubscriptionStatus> {
         return lectureRepository.getAvailableLectures(userInfo, date).map {
-            LectureInfo.from(it)
+            LectureWithSubscriptionStatus.from(userInfo, it)
         }
     }
 

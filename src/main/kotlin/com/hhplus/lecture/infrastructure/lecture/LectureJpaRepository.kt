@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 interface LectureJpaRepository : JpaRepository<Lecture, Long> {
 
-    @EntityGraph(attributePaths = ["lecturer"])
+    @EntityGraph(attributePaths = ["lecturer", "subscriptions"])
     fun findAllByStartTimeGreaterThanEqualAndStartTimeLessThan(
         startTimeIsGreaterThanEqual: LocalDateTime,
         startTimeIsLessThan: LocalDateTime
