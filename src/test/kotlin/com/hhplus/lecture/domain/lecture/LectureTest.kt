@@ -14,6 +14,7 @@ class LectureTest {
         // given
         val lecture = Instancio.of(Lecture::class.java)
             .set(field(Lecture::subscriptionCount), 0)
+            .set(field(Lecture::subscriptions), mutableListOf<LectureSubscription>())
             .create()
 
         // when
@@ -27,6 +28,7 @@ class LectureTest {
     fun `특강 신청 시 신청자 목록에 추가된다`() {
         // given
         val lecture = Instancio.of(Lecture::class.java)
+            .set(field(Lecture::subscriptionCount), 0)
             .set(field(Lecture::subscriptions), mutableListOf<LectureSubscription>())
             .create()
 
