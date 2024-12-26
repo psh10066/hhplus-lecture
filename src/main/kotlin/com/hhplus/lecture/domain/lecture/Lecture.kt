@@ -30,6 +30,7 @@ class Lecture(
 
     fun subscribe(userInfo: UserInfo) {
         check(subscriptionCount < MAX_SUBSCRIPTION_COUNT) { "특강 신청 인원이 초과되었습니다." }
+        check(subscriptions.none { it.userId == userInfo.id }) { "이미 신청한 특강입니다." }
 
         subscriptions.add(LectureSubscription(this, userInfo.id))
         subscriptionCount++

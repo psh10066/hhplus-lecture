@@ -64,6 +64,23 @@ class LectureServiceConcurrencyIT(
         )
     }
 
+    @Test
+    fun `동일한 유저 정보로 같은 특강을 5번 신청했을 때, 1번만 성공한다`() {
+        // when
+        val userInfo = UserInfo(id = 123L, "사용자")
+        concurrencyTestHelper(5,
+            Runnable { lectureService.subscribe(userInfo, 1L) }
+        )
+
+        // then
+        val lecture = lectureJpaRepository.findByIdOrNull(1L)!!
+        val lectureSubscriptions = lectureSubscriptionJpaRepository.findAll().filter { it.lecture == lecture && it.userId == 123L }
+        assertAll(
+            { assertThat(lecture.subscriptionCount).isEqualTo(1) },
+            { assertThat(lectureSubscriptions).hasSize(1) }
+        )
+    }
+
     private fun concurrencyTestHelper(times: Int, vararg tasks: Runnable) {
         val executorService = Executors.newFixedThreadPool(times * tasks.size)
         try {
