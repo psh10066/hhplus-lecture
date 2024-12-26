@@ -17,6 +17,7 @@
 2. Application 실행
 3. 각 API 호출 시 header에 userId 삽입하여 호출
     - userId가 없거나 해당 id의 User가 존재하지 않으면 "접근이 거부되었습니다." 예외 발생
+    - 상세 구현 : API 메서드 내에 UserInfo가 존재하는 경우 [UserInfoArgumentResolver.kt](https://github.com/psh10066/hhplus-lecture/blob/b41dea0444b0bee70d534281e2c2f07180997afd/src/main/kotlin/com/hhplus/lecture/api/resolver/UserInfoArgumentResolver.kt) 에서 header의 userId로 사용자 존재 여부 확인
 
 ## 테스트 요구사항
 
